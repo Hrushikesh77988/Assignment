@@ -23,17 +23,16 @@ Steps:<br/>
 7) Load https://loacalHost:8080/ in browser<br/>
 8)Manager can login using "manager@gmail.com" and passoword is "Manager123"<br/>
 
-<h2>Libraries</h2>
-{Maven Dependancies
-spring-boot-starter-data-jpa
-  mysql-connector-java
-  font-awesome
-  spring-boot-starter-thymeleaf
-  spring-boot-starter-web
-  spring-boot-admin-starter-client
-  spring-boot-devtools
-  spring-boot-starter-test
-}</br>
+<h2>Libraries</h2><br/>
+Maven Dependancies<br/>
+spring-boot-starter-data-jpa<br/>
+mysql-connector-java<br/>
+font-awesome<br/>
+spring-boot-starter-thymeleaf<br/>
+spring-boot-starter-web<br/>
+spring-boot-admin-starter-client<br/>
+spring-boot-devtools<br/>
+spring-boot-starter-test<br/>
 
 
 
