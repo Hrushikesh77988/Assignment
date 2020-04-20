@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container kk">
+  <h2></h2>
+  <!-- Trigger the modal with a button -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a th:href="@{logout}"
+class="button" 
+style="float: right;">Logout</a> 
+  
+  <br>
+  <br>
+  
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="float: right;">Add Employee</button>
+
+
+<div class="card mt-3">
+<div class="card-header">Existing Employee Details </div>
+<div class="card-body m-0 p-0   card_body">
+<table class= "mt-2 mr-2 ml-2 "id="list" cellspacing="3" cellpadding="3" border="1">
+<thead>
+<tr>
+<td>First Name</td>
+<td>Last Name</td>
+<td>Address</td>
+<td>Mobile Number</td>
+<td>City</td>
+<td>Email Address</td>
+
+<td>Date of Birth</td>
+
+
+</tr>
+</thead>
+<tbody >
+<tr th:each="listofcandidate : ${listofcandidate}">
+
+<td th:text="${listofcandidate.getFirstName()}"></td>
+<td th:text="${listofcandidate.getLastName()}"></td>
+<td th:text="${listofcandidate.getAddress()}"></td>
+<td th:text="${listofcandidate.getMobile() }"></td>
+<td th:text="${listofcandidate.getCity()}"></td>
+<td th:text="${listofcandidate.getEmailAddress()}"></td>
+
+<td th:text="${listofcandidate.getDob()}"></td>
+
+
+<td>	
+<a th:href="@{set/(id=${listofcandidate.getId()})}"
+class="btn btn-primary eBtn" 
+>Edit Employee</a> 
+
+
+
+
+
+
+
+</td>
+
+<td>
+<form th:action="@{/setprofile}" method="post">
+								
+								<input type="hidden" th:value="${listofcandidate.getId()}"
+									th:name="candidate_id" />
+
+									
+									<button type="submit" class="myButton" name="action"
+									value="Reject"    >Remove</button>
+									
+							</form>
+
+
+</td>
+
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Employee</h4>
+        </div>
+        <div class="modal-body">
+       
+       
+       
+       
+       <form id="myForm11" class="candiadateform"
+th:action="@{/setprofile}" th:object="${employee}"
+method="post">
+<div class="input-group form-group">
+
+<div class="input-group-prepend">
+<span class="input-group-text">  <i class="fas fa-user">
+First Name</i></span>
+</div>
+<input type="text" id="firstname" class="form-control"
+placeholder="First Name" th:field="*{firstName}" required="" autofocus="">
+
+</div>
+<div class="input-group form-group">
+<div class="input-group-prepend">
+
+<span class="input-group-text"> <label for="exampleInput2"></label>
+<i class="fas fa-key">  Last Name</i></span>
+</div>
+<input type="text" id="lastname" class="form-control"
+placeholder="Last Name"
+th:field="*{lastName}" required="" autofocus="">
+</div>
+
+<div class="input-group form-group">
+<div class="input-group-prepend">
+
+<span class="input-group-text"> <label for="exampleInput2"></label>
+<i class="fas fa-key"> Email Address</i></span>
+</div>
+<input type="text" id="email" class="form-control"
+placeholder="Email Address"
+th:field="*{emailAddress}" required="" autofocus="">
+</div>
+
+
+<div class="input-group form-group">
+<div class="input-group-prepend">
+<span class="input-group-text"> <label for="exampleInput3"></label>
+<i class="fas fa-key">Address</i></span>
+</div>
+<input type="text" id="address" class="form-control"
+placeholder="Address" th:field="*{address}" required="" autofocus="">
+
+
+</div>
+<div class="input-group form-group">
+<div class="input-group-prepend">
+<span class="input-group-text"> <label for="exampleInput4"></label>
+<i class="fas fa-key">Mobile</i></span>
+</div>
+<input type="text" id="mobile" class="form-control"
+placeholder="Description" th:field="*{mobile}" required="" autofocus="">
+
+
+</div>
+
+
+
+<div class="input-group form-group">
+<div class="input-group-prepend">
+<span class="input-group-text"> <label for="exampleInput4"></label>
+<i class="fas fa-key">Date of Birth</i></span>
+</div>
+<input type="date" id="dob" class="form-control"
+placeholder="Date of Birth" th:field="*{dob}" required="" autofocus="">
+
+
+</div>
+
+
+
+<div class="input-group form-group">
+<div class="input-group-prepend">
+<span class="input-group-text"> <label for="exampleInput5"></label>
+<i class="fas fa-key">City</i></span>
+</div>
+<input type="text" id = "city" class="form-control" placeholder="Symbol"
+th:field="*{city}" required="" autofocus="">
+</div>
+
+<button type="submit" id="button_value" value="Add" name="action" 
+onclick="addData()" class="button_submit">Submit</button>
+
+
+
+<button type="submit" id="button_update" value="update" name="action" 
+onclick="updateData()" class="button_update" >Update</button>
+
+
+</form>
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+
+<script>
+function addData() {
+
+
+	$(".button_update").attr('disabled', true);
+
+var isValid = true;
+
+ var elements = document.getElementById('myForm11').getElementsByTagName('input');
+
+ for(var i=0; i < elements.length; i++){
+   if(elements[i].value.length < 1){
+     isValid = false;
+   }
+ }
+
+ if(isValid){
+
+$("#myForm11").submit();
+//document.getElementById("myForm11").reset();
+
+ }
+ else {
+   alert('Please fill all required fields');
+ }
+
+
+}
+
+
+
+function updateData() {
+
+
+
+	var isValid = true;
+
+	 var elements = document.getElementById('myForm11').getElementsByTagName('input');
+
+	 for(var i=0; i < elements.length; i++){
+	   if(elements[i].value.length < 1){
+	     isValid = false;
+	   }
+	 }
+
+	 if(isValid){
+
+	$("#myForm11").submit();
+	//document.getElementById("myForm11").reset();
+
+	 }
+	 else {
+	   alert('Please fill all required fields');
+	 }
+
+
+	}
+
+
+
+$(document).ready(function(){
+$(".eBtn").on('click',function(e) { 
+e.preventDefault();
+console.log("Inside main.js");
+var href=$(this).attr('href');
+
+
+
+$.get(href, function(employee,status){
+$('.candiadateform #firstname').val(employee.firstName);
+$('.candiadateform #lastname').val(employee.lastName);
+$('.candiadateform #address').val(employee.address);
+$('.candiadateform #mobile').val(employee.mobile);
+$('.candiadateform #city').val(employee.city);
+$('.candiadateform #email').val(employee.emailAddress);
+$(".button_update").attr('disabled', false);
+
+$(".button_submit").attr('disabled', true);
+
+
+
+});
+
+
+$('#myModal').modal('show');
+
+  
+ });
+});
+
+</script>
+
+</body>
+</html>
